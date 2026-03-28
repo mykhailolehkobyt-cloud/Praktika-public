@@ -3,6 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="../Задача 2/Задача 2.vcxproj" Id="94c194d3-e768-4f1e-9b3b-5fa146c33e3b" />
   <Project Path="Praktika-1-2-3-4-5.vcxproj" Id="eddd0c14-ccc5-49ab-a170-69764430f339" />
 </Solution>
