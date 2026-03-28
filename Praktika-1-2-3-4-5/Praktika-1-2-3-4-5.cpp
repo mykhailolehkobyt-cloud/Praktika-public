@@ -1,97 +1,52 @@
-﻿
+﻿#include <cmath>
 #include <iostream>
-using namespace std;
-#include <vector>
-#include <iomanip>
-#include <locale>
 
-void  GenerateMatrix(vector<vector<double>>& mat, int N)
+double Getsum(double arr[], int size)
 {
-    srand(time(0));
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            mat[i][j] = rand() % 19 - 9;
-        }
-    }
+	double sumabs = 0;
+	for (int i = 0; i < size; i++)
+	{
+		sumabs += fabs(arr[i]);
+	}
+	return sumabs;
 }
 
-void PrintMatrix(const vector<vector<double>>& mat, int N)
+double GetProductOfFractions(double arr[], int size)
 {
-    cout << "--- Матриця " << N << "x" << N << " ---" << endl;
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            cout << setw(6) << mat[i][j];
-        }
-        cout << endl << endl;
-    }
+	double sort = 1;
+	for (int i = 0; i < size; i++)
+	{
+		sort = sort * (1.0 / arr[i]);
+	}
+	return sort;
 }
-
-
-double average(const vector<vector<double>>& mat, int N)
-{
-    double suma = 0;
-    int count = 0;
-
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-
-            if (mat[i][j] > 0)
-            {
-                suma += mat[i][j];
-                count++;
-            }
-        }
-    }
-    if (count > 0) {
-        return suma / count;
-    }
-    else {
-        return 0;
-    }
-}
-
-
-double Sector8(vector<vector<double>>& mat, int N, double avg)
-{
-    double sector3 = 0;
-
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-
-            if (j > i && i + j > N - 1) {
-                if (mat[i][j] > 0) {
-
-                    sector3++;
-                }
-            }
-            if (i > j)
-            {
-                mat[i][j] = avg;
-            }
-        }
-    }
-    cout << "Кількість натуральних чисел у Секторі 3 " << sector3 << endl;
-    return 0;
-}
-
-
 
 
 
 int main()
 {
-    setlocale(LC_ALL, "Ukrainian");
-    int N;
-    cout << "Введіть розмір матриці =)";
-    cin >> N;
-    vector<vector<double>> matrix(N, vector<double>(N));
-    GenerateMatrix(matrix, N);
-    PrintMatrix(matrix, N);
-    double averige = average(matrix, N);
-    cout << "Середнє арифметичне додатних чисел " << averige << endl << endl;
+	using namespace std;
+	double A[6] = { -2.3, 6.2, 5.8, -3.4, 7.1, 0.05 };
+	double B[6] = { 3.0, -2.3, 4.1, 2.5, 6.8, 4.5 };
 
-    Sector8(matrix, N, averige);
-    cout << "\nМатриця ПІСЛЯ обробки секторів:\n";
-    PrintMatrix(matrix, N);
-    return 0;
+	double X = Getsum(A, 6);
+	double Y = Getsum(B, 6);
+
+	double a = GetProductOfFractions(A, 6);
+	double b = GetProductOfFractions(B, 6);
+
+	double p = (a + b) / (X - Y);
+	double W;
+
+	if (p > 0)
+	{
+		W = a * X + Y;
+	}
+	else
+	{
+		W = b * X + Y;
+	}
+	cout << "Result W: " << W << endl;
+
+	return 0;
 }
